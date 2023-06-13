@@ -1,6 +1,6 @@
 # go-jwt
 
-## Usage
+## Dependencies
 
 Install the dependencies
 
@@ -20,3 +20,11 @@ $ go get -u gorm.io/driver/sqlite
 $ go get -u github.com/gin-gonic/gin
 ```
 `gin` is a high-performance HTTP web framework written in Golang (Go).
+
+## Usage
+
+run 
+
+```bash
+$ go Install
+```
