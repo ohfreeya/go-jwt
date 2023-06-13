@@ -8,14 +8,12 @@
 </head>
 <body>
     <h3>Register Page</h3>
+    <p>{{ .message }}</p>
     <form action="#" method="post">
         <input type="text" name="name" placeholder="Name">
         <input type="text" name="nickname" placeholder="Nickname">
+        <input type="text" name="email" placeholder="Email">
         <input type="text" name="password" placeholder="Password">
-        <select name="sex" id="sex">
-            <option value="male">男性</option>
-            <option value="female">女性</option>
-        </select>
         <button type="submit">Register</button>
     </form>
 </body>
