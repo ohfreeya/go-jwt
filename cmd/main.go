@@ -4,6 +4,7 @@ import (
 	"go-jwt/database"
 	"go-jwt/internal/route"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +14,7 @@ func main() {
 
 	server := gin.Default()
 
+	server.Use(cors.Default())
 	// loading all front-end templates
 	server.LoadHTMLGlob("../template/*")
 

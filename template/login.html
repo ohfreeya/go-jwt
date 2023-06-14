@@ -1,38 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script>
-        function sendForm(){
-            email = $('#email').val()
-            password = $('#password').val()
-            data = {
-                "email": email,
-                "password": password
-            }
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/login",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function(data){
-                    console.log(data)
-                }
-            })
-        }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <h3>Login page</h3>
     <p>{{ .message }}</p>
-    <input type="text" name="email" placeholder="Email" id="email">
-    <input type="text" name="password" placeholder="Password" id="password">
-    <button onclick="sendForm()">Login</button>
+    <form action="/login" method="post">
+        <input type="text" name="email" placeholder="Email" id="email">
+        <input type="text" name="password" placeholder="Password" id="password">
+        <button type="submit">Login</button>
+    </form>
     <a href="/register">Register </a>
 </body>
+
 </html>

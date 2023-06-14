@@ -10,8 +10,8 @@ import (
 )
 
 type loginRequest struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Email    string `json:"email" form:"email"`
+	Password string `json:"password" form:"password"`
 }
 
 func HandleLogin() gin.HandlerFunc {
@@ -29,7 +29,7 @@ func LoginAuth() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var request loginRequest
 		var user model.User
-		if err := ctx.ShouldBindJSON(&request); err != nil {
+		if err := ctx.ShouldBind(&request); err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 			ctx.Abort()
 			return
@@ -46,7 +46,7 @@ func LoginAuth() gin.HandlerFunc {
 			ctx.Abort()
 			return
 		}
-		ctx.Redirect(301, "http://localhost/index")
+		ctx.Redirect(http.StatusMovedPermanently, "/index")
 	}
 }
 func HandleRegister() gin.HandlerFunc {
