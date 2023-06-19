@@ -8,16 +8,46 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script>
+        function sendForm() {
+            email = $('#email').val();
+            password = $('#password').val();
+            data = {
+                "email": email,
+                "password": password
+            };
+            $.ajax({
+                method: "POST",
+                url: "http://localhost:8080/login",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(data),
+                success: function(data) {
+                    sessionStorage.setItem("token", data["token"]);
+                    $.ajax({
+                        method: "GET",
+                        url: data["redirect_url"],
+                        headers: {
+                            "Authorization": data["token"],
+                        },
+                        success: function(test){
+                            console.log(test)
+                        }
+                    })
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
     <h3>Login page</h3>
     <p>{{ .message }}</p>
-    <form action="/login" method="post">
-        <input type="text" name="email" placeholder="Email" id="email">
-        <input type="text" name="password" placeholder="Password" id="password">
-        <button type="submit">Login</button>
-    </form>
+    <input type="text" name="email" placeholder="Email" id="email">
+    <input type="text" name="password" placeholder="Password" id="password">
+    <button onclick="sendForm()">Login</button>
     <a href="/register">Register </a>
 </body>
 

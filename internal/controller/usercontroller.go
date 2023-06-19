@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"go-jwt/auth"
 	"go-jwt/database"
 	"go-jwt/internal/model"
 	"net/http"
@@ -29,7 +30,7 @@ func LoginAuth() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var request loginRequest
 		var user model.User
-		if err := ctx.ShouldBind(&request); err != nil {
+		if err := ctx.ShouldBindJSON(&request); err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 			ctx.Abort()
 			return
@@ -46,7 +47,14 @@ func LoginAuth() gin.HandlerFunc {
 			ctx.Abort()
 			return
 		}
-		ctx.Redirect(http.StatusMovedPermanently, "/index")
+		tokenString, err := auth.GenerateJWT(user.Email, user.Name)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			ctx.Abort()
+			return
+		}
+		ctx.JSON(http.StatusOK, gin.H{"token": tokenString, "redirect_url": "Http://localhost:8080/api/index", "message": "login successfully"})
+		return
 	}
 }
 func HandleRegister() gin.HandlerFunc {
