@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+
     </script>
 </head>
+
 <body>
     <h3>index page</h3>
+    <p>{{ .test }}</p>
+    {{ range .Data}}
+    <h5>{{ .Title }}</h5>
+    <p>{{ .Message }}</p>
+    <p>{{ .Name }}</p>
+    {{end}}
 </body>
+
 </html>

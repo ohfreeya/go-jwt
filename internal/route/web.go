@@ -16,7 +16,7 @@ func Route(g *gin.RouterGroup) {
 	g.POST("/register", controller.RegisterUser())
 
 	auth := g.Group("/api", middlewares.Auth())
-	auth.GET("/index", controller.HandleIndex())
+	g.GET("/index", controller.HandleIndex())
 	auth.POST("/test", func(ctx *gin.Context) {
 		fmt.Println("test")
 	})

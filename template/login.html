@@ -26,16 +26,17 @@
                 data: JSON.stringify(data),
                 success: function(data) {
                     sessionStorage.setItem("token", data["token"]);
-                    $.ajax({
-                        method: "GET",
-                        url: data["redirect_url"],
-                        headers: {
-                            "Authorization": data["token"],
-                        },
-                        success: function(test){
-                            console.log(test)
-                        }
-                    })
+                    window.location.href = "http://localhost:8080/index";
+                    // $.ajax({
+                    //     method: "GET",
+                    //     url: data["redirect_url"],
+                    //     headers: {
+                    //         "Authorization": data["token"],
+                    //     },
+                    //     success: function(test){
+                    //         console.log(test)
+                    //     }
+                    // })
                 }
             })
         }

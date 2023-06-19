@@ -23,7 +23,15 @@ func HandleLogin() gin.HandlerFunc {
 
 func HandleIndex() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.HTML(200, "index.html", nil)
+		var data []model.Blog
+		record := database.Instance.Find(&data)
+
+		if record.Error != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"message": record.Error.Error()})
+			ctx.Abort()
+			return
+		}
+		ctx.HTML(200, "index.html", gin.H{"Data": data, "test": "test"})
 	}
 }
 func LoginAuth() gin.HandlerFunc {
