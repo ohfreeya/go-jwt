@@ -22,5 +22,6 @@ func Connect(connectString string) {
 
 func Migration() {
 	Instance.AutoMigrate(&model.User{})
+	Instance.AutoMigrate(&model.Blog{})
 	log.Println("Successfully migrated database")
 }
